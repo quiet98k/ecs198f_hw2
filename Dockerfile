@@ -2,19 +2,18 @@ FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y wget git
 
-RUN mkdir -p /opt/miniconda3
+WORKDIR /
+
+RUN mkdir -p ~/miniconda3
 
 # RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O /opt/miniconda3/miniconda.sh
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /opt/miniconda3/miniconda.sh
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
 
 
-RUN bash /opt/miniconda3/miniconda.sh -b -u -p /opt/miniconda3
+RUN bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 
-RUN rm /opt/miniconda3/miniconda.sh
+RUN rm ~/miniconda3/miniconda.sh
 
-ENV PATH="/opt/miniconda/bin:$PATH"
-
-WORKDIR /
 
 RUN git clone https://github.com/dbarnett/python-helloworld.git 
 
